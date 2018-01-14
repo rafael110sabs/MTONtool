@@ -44,9 +44,9 @@ public class CSVThemAll
 
         PreparedStatement stm = conn.prepareStatement(columnsNames
                 + " UNION ALL"
-                + " SELECT * FROM" + tableName
+                + " SELECT * FROM " + tableName
                 + "     INTO OUTFILE '/var/lib/mysql-files/" + tableName + ".csv'"
-                + "     FIELDS ENCLOSED BY '\"'"
+                + "     FIELDS ENCLOSED BY '\"' "
                 + "     TERMINATED BY ','"
                 + "     ESCAPED BY ''"
                 + "     LINES TERMINATED BY '\\r\\n';");
