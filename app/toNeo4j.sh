@@ -8,12 +8,12 @@ sudo rm -rf /var/lib/neo4j/data/databases/graph.db/*
 sudo service neo4j start
 sleep 2
 
-cp files/exports/* /var/lib/neo4j/import
+sudo cp files/exports/* /var/lib/neo4j/import
 echo ">Starting migration"
 # Please, change the username and password that you set on neo4j
-cypher-shell -u neo4j -p root < files/EscolaConducao.cyp
+cypher-shell -u neo4j -p intruso < files/EscolaConducao.cyp
 echo ">Migration complete."
 
 echo ">Removing csv files"
-rm /var/lib/neo4j/import/*.csv
+sudo rm /var/lib/neo4j/import/*.csv
 echo ">Done"

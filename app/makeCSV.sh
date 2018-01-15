@@ -6,7 +6,7 @@ sudo rm -rf /var/lib/mysql-files/*
 mkdir files/exports
 echo ">Starting the conversion"
 # You must change username and password
-java -jar CSVThemAll.jar appuser "appconnection"
+java -jar CSVThemAll.jar root ""
 
 echo ">Moving generated files"
 sudo mv /var/lib/mysql-files/* files/exports/
