@@ -27,7 +27,7 @@ FIELDTERMINATOR ','
                   DataInscricao: row.DataInscricao});
 
 
-CREATE INDEX ON :Aluno(NrCartaoCidadao);
+CREATE CONSTRAINT ON (a:Aluno) ASSERT a.NrCartaoCidadao IS UNIQUE;
 // ---------------------------------------------------------------------
 
 
@@ -45,7 +45,7 @@ CREATE (:Veiculo {
       idVeiculo: toInteger(row.idVeiculo),
       Categoria: row.Categoria});
 
-CREATE INDEX ON :Veiculo(idVeiculo);
+CREATE CONSTRAINT ON (v:Veiculo) ASSERT v.idVeiculo IS UNIQUE;
 // ---------------------------------------------------------------------
 
 
@@ -65,7 +65,7 @@ CREATE (:Instrutor {
       Morada: row.Morada,
       eMail: row.eMail});
 
-CREATE INDEX ON :Instrutor(NrCartaoCidadao);
+CREATE CONSTRAINT ON (i:Instrutor) ASSERT i.NrCartaoCidadao IS UNIQUE;
 // ---------------------------------------------------------------------
 
 
@@ -130,11 +130,10 @@ USING PERIODIC COMMIT
 LOAD CSV WITH HEADERS FROM "file:///CategoriaInscritaAluno.csv" AS row
 FIELDTERMINATOR ','
 MATCH (a:Aluno{NrCartaoCidadao: toInteger(row.Aluno)})
-  MERGE (ca:CategoriaInscritaAluno {Categoria: row.Categoria})
+  MERGE (ca:Categoria {Categoria: row.Categoria})
 WITH ca, a
   CREATE (a)-[:Inscrito]->(ca);
 
-CREATE INDEX ON :CategoriaInscritaAluno(Aluno);
 // ---------------------------------------------------------------------
 
 // TelemovelInstrutor
@@ -145,7 +144,7 @@ FIELDTERMINATOR ','
 MATCH (i:Instrutor{NrCartaoCidadeo: toInteger(row.Instrutor)})
   CREATE (t:Telemovel {Numero: toInteger(row.Telemovel)})<-[:Tem]-(i);
 
-CREATE INDEX ON :TelemovelInstrutor(Instrutor);
+CREATE CONSTRAINT ON (t:Telemovel) ASSERT t.Numero IS UNIQUE;
 // ---------------------------------------------------------------------
 
 
@@ -160,5 +159,4 @@ FIELDTERMINATOR ','
 MATCH (a:Aluno{NrCartaoCidadao : toInteger(row.Aluno)})
   CREATE (t:Telemovel {Numero: toInteger(row.Telemovel)})<-[:Tem]-(a);
 
-CREATE INDEX ON :TelemovelAluno(Aluno);
 // ---------------------------------------------------------------------
