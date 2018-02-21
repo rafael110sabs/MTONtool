@@ -4,3 +4,4 @@
 **Caso de Estudo**: Escola de Condução
 
 Criada no âmbito da Unidade Curricular de Base de Dados 17/18.
+Universidade do Minho.
